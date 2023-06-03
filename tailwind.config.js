@@ -16,7 +16,10 @@ module.exports = {
 
     extend: {
       gridTemplateColumns: {
-        navbar: "100px 1fr",
+        navbar: "100px 1fr 100px",
+      },
+      gridTemplateRows: {
+        navbar: "100px",
       },
       backgroundImage: {
         register: "url('/bg-blur.jpg')",

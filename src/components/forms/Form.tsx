@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { useState } from "react";
+import Cookies from "js-cookie";
 export type Form = {
   login: string;
   password: string;
@@ -21,7 +22,9 @@ export const Form = ({ className, type, ...props }: FormProps): JSX.Element => {
     try {
       const response =
         type === "register" ? await registerUser(data) : await loginUser(data);
-      console.log(response.data);
+      if (response.data.access_token) {
+        Cookies.set("token", response.data.access_token);
+      }
       setError("");
       router.push("/");
     } catch (e) {

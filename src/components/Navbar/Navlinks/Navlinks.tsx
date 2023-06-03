@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { NavlinksProps } from "./Navlinks.props";
 import { usePathname } from "next/navigation";
+import { AuthStatus } from "@/components/AuthStatus/AuthStatus";
 const links = [
   {
     href: "/catalog",
@@ -11,10 +12,6 @@ const links = [
     href: "/add",
     name: "Add new",
   },
-  {
-    href: "/user",
-    name: "User",
-  },
 ];
 export const Navlinks = ({
   className,
@@ -23,7 +20,7 @@ export const Navlinks = ({
   const pathname = usePathname();
   return (
     <div
-      className={`${className}  flex-1 justify-self-end flex gap-4 text-lg`}
+      className={`${className}  items-center flex-1 justify-self-end flex gap-4 text-lg`}
       {...props}
     >
       {links.map(({ name, href }) => (
