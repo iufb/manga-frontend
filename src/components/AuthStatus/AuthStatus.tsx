@@ -1,10 +1,11 @@
 "use client";
-import { User } from "@/types/types";
+import { useAuth } from "@/hooks/useAuth";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FiLogOut } from "react-icons/fi";
+import { UserIcon } from "../UserIcon/UserIcon";
 const LoginOrRegister = () => (
   <div className="flex gap-2 text-md">
     <Link href={"/login"}>Login </Link>
@@ -12,21 +13,8 @@ const LoginOrRegister = () => (
     <Link href={"/register"}>Register</Link>
   </div>
 );
-const UserIcon = ({ icon, name }: { icon: string; name: string }) => (
-  <Link
-    href={{
-      pathname: `/${name}`,
-    }}
-  >
-    <Image
-      src={icon ? `http://localhost:3000/${icon}` : "/user.jpg"}
-      alt="Profile"
-      width={35}
-      height={40}
-    />
-  </Link>
-);
-export const AuthStatus = ({ user }: { user: User | null }) => {
+export const AuthStatus = () => {
+  const { user } = useAuth();
   const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
     setToken(Cookies.get("token") ?? null);
@@ -39,7 +27,9 @@ export const AuthStatus = ({ user }: { user: User | null }) => {
     <div className="ml-10">
       {token && user ? (
         <div className=" gap-2 center w-[100px]  ">
-          <UserIcon icon={user.avatar} name={user.email?.split("@")[0]} />
+          <Link href={`/${user.email?.split("@")[0]}`}>
+            <UserIcon avatar={user.avatar} width={35} height={40} />
+          </Link>
           <button
             className="btn btn-square btn-sm bg-lightGrey text-indigoGrey border-none"
             onClick={logout}

@@ -11,3 +11,7 @@ export type User = {
   createdAt: string;
   readingComics: ReadingComics[];
 };
+export type UpdateUser = {
+  name?: string;
+  avatar?: string;
+};

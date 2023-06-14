@@ -1,6 +1,6 @@
 import { Form } from "@/components";
 import axios from "axios";
-import instance from "./axios-client";
+import { instance } from "./axios-client";
 export const axiosClient = axios.create({
   baseURL: "http://localhost:3000/api",
 });

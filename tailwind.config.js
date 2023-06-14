@@ -17,6 +17,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         navbar: "100px 1fr 100px",
+        userHeader: "52px 1fr 200px",
       },
       gridTemplateRows: {
         navbar: "100px",
@@ -27,6 +28,7 @@ module.exports = {
       },
       colors: {
         indigoGrey: "#6c8480",
+        indigoLight: "#8caba6",
         lightGrey: "#d4dcda",
         customWhite: "#f4f4f4",
       },

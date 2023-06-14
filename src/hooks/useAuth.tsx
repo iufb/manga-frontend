@@ -1,15 +1,9 @@
 "use client";
 
-import { getUser } from "@/services/user";
+import fetcher from "@/services/axios-client";
 import { User } from "@/types/types";
-import { useEffect, useState } from "react";
-
+import useSWR from "swr";
 export const useAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
-  useEffect(() => {
-    getUser().then(({ data }) => {
-      setUser(data);
-    });
-  }, []);
-  return { user, setUser };
+  const { data: user } = useSWR<User>("/user", fetcher);
+  return { user };
 };
