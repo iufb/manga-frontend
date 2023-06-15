@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import Cookies from "js-cookie";
+import { Input } from "../inputs/Input/Input";
 export type Form = {
   login: string;
   password: string;
@@ -39,22 +40,16 @@ export const Form = ({ className, type, ...props }: FormProps): JSX.Element => {
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <label className="input-group ">
-        <span className="text-md mobile:text-sm text-indigoGrey">Email</span>
-        <input
-          type="email"
-          className="input input-bordered  flex-1 mobile:pr-0"
-          {...register("login", { required: true })}
-        />
-      </label>
-      <label className="input-group w-full">
-        <span className="text-md mobile:text-sm text-indigoGrey">Password</span>
-        <input
-          type="password"
-          className="input input-bordered w-full mobile:pr-0"
-          {...register("password", { required: true, min: 6 })}
-        />
-      </label>
+      <Input
+        type="email"
+        title="Email"
+        {...register("login", { required: true })}
+      />
+      <Input
+        type="password"
+        title="Password"
+        {...register("password", { required: true, min: 6 })}
+      />
       {error && <p className=" text-red-600">{error}</p>}
       <button type="submit" className="btn ">
         {type}

@@ -15,8 +15,8 @@ export const CropImageModal = ({
     unit: "%", // Can be 'px' or '%'
     x: 0,
     y: 0,
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 80,
   });
 
   const type = image.type;

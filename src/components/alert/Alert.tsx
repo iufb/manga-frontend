@@ -28,9 +28,7 @@ export const Alert = ({ className, ...props }: AlertProps): JSX.Element => {
   if (text && type) {
     return (
       <div
-        className={`alert ${
-          "alert-" + type
-        } absolute z-10  max-w-[500px] right-2 top-10 w-full justify-normal `}
+        className={`alert  alert-${type}  absolute z-10  max-w-[500px] right-2 top-10 w-full justify-normal `}
         {...props}
       >
         {getIcon()}

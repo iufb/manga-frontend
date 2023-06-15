@@ -53,37 +53,14 @@ export const AboutUserForm = ({ className, ...props }: AboutUserFormProps) => {
     updateUser({ avatar: "" });
     mutate("/user");
   };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      const file = files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e) => {
-        const img = new Image();
-        if (typeof e.target?.result == "string") img.src = e.target?.result;
-        img.onload = () => {
-          const { height, width } = img;
-          if (height > 500 || width > 500) {
-            setImage(null);
-            setAlert("Height and Width must not exceed 500px.", "error");
-            return false;
-          } else {
-            setImage(file);
-          }
-        };
-      };
-    }
-  };
   return (
     <form
       className={`${className} w-full max-w-[900px]   col gap-4 mobile:px-4 tablet:px-10  desktop:tablet:px-20`}
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className="text-xl ">Avatar</h2>
       <div className="flex gap-3 ">
-        <ImageInput onChange={handleChange} />
+        <ImageInput setImage={setImage} label="Avatar:" />
         <div className="w-28 h-28 border border-dotted border-gray-400 center relative">
           <UserIcon avatar={user?.avatar} width={90} height={90} />
           <button

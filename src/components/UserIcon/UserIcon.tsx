@@ -6,17 +6,20 @@ export const UserIcon = ({
   width,
   height,
   className,
+  ...props
 }: UserIconProps): JSX.Element => {
   return (
-    <Image
-      src={avatar ? `http://localhost:3000/${avatar}` : "/user.jpg"}
-      alt="user"
-      width={width}
-      height={height}
-      style={{
-        objectFit: "contain",
-      }}
-      className={`${className} rounded-md`}
-    />
+    <div {...props} className="cursor-pointer">
+      <Image
+        src={avatar ? `http://localhost:3000/${avatar}` : "/user.jpg"}
+        alt="user"
+        width={width}
+        height={height}
+        style={{
+          objectFit: "contain",
+        }}
+        className={`${className} rounded-md`}
+      />
+    </div>
   );
 };

@@ -1,7 +1,7 @@
-import { Navbar } from "@/components/Navbar/Navbar";
 import "./globals.css";
 import { Outfit } from "next/font/google";
 import { AlertProvider } from "@/context/AlertContext";
+import { ModalProvider } from "@/context/ModalContext";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -18,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.className}`}>
-        <AlertProvider>{children}</AlertProvider>
+        <ModalProvider>
+          <AlertProvider>{children}</AlertProvider>
+        </ModalProvider>
       </body>
     </html>
   );
