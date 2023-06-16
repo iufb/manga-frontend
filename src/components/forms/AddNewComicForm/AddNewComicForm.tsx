@@ -8,7 +8,8 @@ import { AddNewComicFormProps } from "./AddNewComicForm.props";
 import { ImageInput } from "@/components/inputs/ImageInput/ImageInput";
 import { comicStatus, createNewComic } from "@/constants";
 import { Select } from "@/components/Select/Select";
-import { Comic, NewComicForm } from "@/types/types";
+import { Comic, ComicForm } from "@/types/types";
+import { MultiSelect } from "@/components/Select/MultiSelect/MultiSelect";
 
 export const AddNewComicForm = ({
   className,
@@ -37,9 +38,11 @@ export const AddNewComicForm = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <ImageInput setImage={setImage} label="Comic Cover:" />
-      {createNewComic.map(({ label }: { label: Comic }) => (
-        <Input key={label} title={label} {...register(label)} />
+      {createNewComic.map(({ label }) => (
+        <Input key={label} title={label} {...register(label as ComicForm)} />
       ))}
+
+      <MultiSelect items={comicStatus} title="Genres" />
       <div className="flex gap-2 w-full ">
         <Select
           items={comicStatus}
