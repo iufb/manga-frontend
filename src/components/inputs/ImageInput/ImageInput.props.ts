@@ -9,6 +9,8 @@ export interface ImageInputProps
     HTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  setImage: Dispatch<SetStateAction<File | null>>;
+  setImage: Dispatch<SetStateAction<File | Blob | null | undefined>>;
   label: string;
+  minWidth?: number;
+  setIsValid: Dispatch<SetStateAction<boolean>>;
 }

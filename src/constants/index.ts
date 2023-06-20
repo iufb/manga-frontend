@@ -1,3 +1,5 @@
+import { ComicForm } from "@/types/types";
+
 export const userMenu = [
   {
     name: "Profile",
@@ -10,34 +12,92 @@ export const userMenu = [
 ];
 export const comicTypes = ["Manga", "Manhwa", "Manhua"];
 export const comicStatus = ["Ongoing", "Finished", "Dropped"];
-export const createNewComic = [
+export const genres = [
+  "Action",
+  "Adventure",
+  "Comedy",
+  "Drama",
+  "Fantasy",
+  "Historical",
+  "Horror",
+  "Mystery",
+  "Psychological",
+  "Romance",
+  "Sci-Fi",
+  "Slice of Life",
+  "Sports",
+  "Supernatural",
+  "Thriller",
+  "Yaoi",
+  "Yuri",
+  "Harem",
+  "Isekai",
+  "Mecha",
+  "Music",
+  "School",
+  "Shoujo",
+  "Shounen",
+  "Seinen",
+  "Josei",
+  "Ecchi",
+  "Adult",
+  "Gore",
+  "Tragedy",
+  "Webtoon",
+  "Manhwa",
+  "Martial Arts",
+  "Superpower",
+  "Vampire",
+  "Zombie",
+  "Magical Girl",
+  "Reverse Harem",
+  "Police",
+  "Samurai",
+  "Cooking",
+  "Gaming",
+  "Demons",
+  "Space",
+  "Post-Apocalyptic",
+  "Time Travel",
+  "Cyberpunk",
+  "Military",
+  "Mature",
+  "Parody",
+  "Aliens",
+  "Moe",
+  "Gender Bender",
+  "Dementia",
+  "Medical",
+  "Superhero",
+  "War",
+  "Fantasy World",
+  "Romantic Comedy",
+  "Hentai",
+];
+export const createNewComic: { label: string; registerProp: ComicForm }[] = [
   {
     label: "Title",
-    register: "",
+    registerProp: "title",
   },
   {
     label: "Alternative title",
-    register: "",
+    registerProp: "alternativeTitle",
   },
   {
     label: "Description",
-    register: "",
-  },
-  {
-    label: "Type",
-    register: "",
+    registerProp: "description",
   },
 
   {
     label: "Author",
-    register: "",
+    registerProp: "author",
   },
   {
     label: "Artist",
-    register: "",
+    registerProp: "artist",
   },
   {
     label: "Publish company",
-    register: "",
+    registerProp: "publishingCompany",
   },
 ];

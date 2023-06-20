@@ -1,7 +1,6 @@
 import { Footer } from "@/components/Footer/Footer";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Alert } from "@/components/alert/Alert";
-import { AlertProvider } from "@/context/AlertContext";
 
 export default function RootLayout({
   children,

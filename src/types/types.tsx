@@ -1,15 +1,13 @@
 type ReadingComics = {
   id: string;
 };
-type ComicType = "manga" | "manhwa" | "manhua";
-type ComicStatus = "ongoing" | "finished" | "dropped";
+export type ComicType = "manga" | "manhwa" | "manhua";
+export type ComicStatus = "ongoing" | "finished" | "dropped";
 export type ComicForm =
-  | "imgCover"
   | "title"
   | "alternativeTitle"
   | "description"
   | "type"
-  | "genres"
   | "status"
   | "translateStatus"
   | "author"
@@ -28,7 +26,7 @@ export type UpdateUser = {
   name?: string;
   avatar?: string;
 };
-export type Comic = {
+export interface IComic {
   imgCover: string;
   title: string;
   alternativeTitle: string;
@@ -40,4 +38,4 @@ export type Comic = {
   author: string;
   artist: string;
   publishingCompany: string;
-};
+}

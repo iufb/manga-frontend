@@ -5,6 +5,7 @@ export const instance = axios.create({
   headers: {
     common: {
       Authorization: `Bearer ${Cookies.get("token")}`,
+      "Content-Type": "application/json",
     },
   },
 });

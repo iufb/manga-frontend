@@ -18,7 +18,6 @@ export const UserMenuModal = ({
   const modalRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(modalRef, () => setModal("close"));
   const path = usePathname();
-  console.log(path);
   useEffect(() => {
     setModal("close");
   }, [path]);

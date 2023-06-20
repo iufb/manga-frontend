@@ -1,24 +1,25 @@
 "use client";
 
 import { AxiosError } from "axios";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AboutUserFormProps } from "./AboutUserForm.props";
-import { uploadAvatar } from "@/services/uploads";
+import { upload } from "@/services/uploads";
 import { updateUser } from "@/services/user";
 import { useSWRConfig } from "swr";
 import { ImageInput } from "@/components/inputs/ImageInput/ImageInput";
 import { ModalContainer } from "@/components/modals/ModalContainer/ModalContainer";
 import { CropImageModal } from "@/components/modals/CropImageModal/CropImageModal";
 import { useAlert } from "@/hooks/useAlert";
-import { UserIcon } from "@/components/UserIcon/UserIcon";
 import { useAuth } from "@/hooks/useAuth";
-import { AiOutlineDelete } from "react-icons/ai";
+import { ImagePreview } from "@/components/ImagePreview/ImagePreview";
+import { ImageForm } from "../ImageForm/ImageForm";
 
 export type createUserType = {
   name: string;
   avatar: File[];
 };
+
 export const AboutUserForm = ({ className, ...props }: AboutUserFormProps) => {
   const {
     register,
@@ -28,12 +29,11 @@ export const AboutUserForm = ({ className, ...props }: AboutUserFormProps) => {
   const [error, setError] = useState("");
   const { mutate } = useSWRConfig();
   const { user } = useAuth();
-  const [image, setImage] = useState<File | null>(null);
-  const [cropImage, setCropImage] = useState<Blob>();
+  const [image, setImage] = useState<File | Blob | null | undefined>(null);
   const { setAlert } = useAlert();
   const onSubmit: SubmitHandler<createUserType> = async (data) => {
     try {
-      const imageUrl = await uploadAvatar(cropImage);
+      const imageUrl = await upload(image, "avatar");
       if (imageUrl) {
         updateUser({
           name: data.name,
@@ -42,7 +42,7 @@ export const AboutUserForm = ({ className, ...props }: AboutUserFormProps) => {
       }
       mutate("/user");
       setAlert("Profile information updated successfully", "success");
-      setCropImage(undefined);
+      setImage(undefined);
     } catch (e) {
       if (e instanceof AxiosError) {
         setError(e.response?.data.message);
@@ -59,20 +59,7 @@ export const AboutUserForm = ({ className, ...props }: AboutUserFormProps) => {
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="flex gap-3 ">
-        <ImageInput setImage={setImage} label="Avatar:" />
-        <div className="w-28 h-28 border border-dotted border-gray-400 center relative">
-          <UserIcon avatar={user?.avatar} width={90} height={90} />
-          <button
-            className={`btn  btn-square btn-sm ${
-              !user?.avatar && "hidden"
-            }    bg-opacity-90 absolute top-0 left-0 `}
-            onClick={deleteAvatar}
-          >
-            <AiOutlineDelete />
-          </button>
-        </div>
-      </div>
+      <ImageForm image={image} setImage={setImage} label="Avatar: " />
       <label className="input-group ">
         <span className="text-md mobile:text-sm text-indigoGrey">Name</span>
         <input
@@ -81,15 +68,6 @@ export const AboutUserForm = ({ className, ...props }: AboutUserFormProps) => {
         />
       </label>
       {error && <p className=" text-red-600">{error}</p>}
-      {image && (
-        <ModalContainer>
-          <CropImageModal
-            image={image}
-            setCropImage={setCropImage}
-            setImage={setImage}
-          />
-        </ModalContainer>
-      )}
       <button type="submit" className="btn ">
         Save
       </button>

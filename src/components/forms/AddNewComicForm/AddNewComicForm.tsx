@@ -5,12 +5,16 @@ import { AxiosError } from "axios";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AddNewComicFormProps } from "./AddNewComicForm.props";
-import { ImageInput } from "@/components/inputs/ImageInput/ImageInput";
-import { comicStatus, createNewComic } from "@/constants";
+import { comicStatus, comicTypes, createNewComic, genres } from "@/constants";
 import { Select } from "@/components/Select/Select";
-import { Comic, ComicForm } from "@/types/types";
+import { IComic } from "@/types/types";
 import { MultiSelect } from "@/components/Select/MultiSelect/MultiSelect";
-
+import { upload } from "@/services/uploads";
+import { createComic } from "@/services/comic";
+import { useAlert } from "@/hooks/useAlert";
+import { useRouter } from "next/navigation";
+import { ImageForm } from "../ImageForm/ImageForm";
+type newComicForm = Omit<IComic, "imgCover" | "genres">;
 export const AddNewComicForm = ({
   className,
   ...props
@@ -19,15 +23,30 @@ export const AddNewComicForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Comic>();
-  const [error, setError] = useState("");
-  const [image, setImage] = useState<File | null>(null);
-  const onSubmit: SubmitHandler<Comic> = async (data) => {
+  } = useForm<newComicForm>();
+  const [comicCover, setComicCover] = useState<File | null | Blob | undefined>(
+    null
+  );
+  const [comicBg, setComicBg] = useState<File | null>(null);
+  const router = useRouter();
+  const { setAlert } = useAlert();
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const onSubmit: SubmitHandler<newComicForm> = async (data) => {
     try {
-      console.log(data);
+      const uploadedImage = await upload(comicCover, "comicCover", {
+        comicName: data.alternativeTitle,
+      });
+      if (uploadedImage) {
+        const comic = await createComic({
+          ...data,
+          genres: selectedGenres,
+          imgCover: uploadedImage.data.url,
+        });
+        router.push(`/comic/${comic.data._id}`);
+      }
     } catch (e) {
       if (e instanceof AxiosError) {
-        setError(e.response?.data.message);
+        setAlert(e.response?.data.message, "error");
       }
     }
   };
@@ -37,27 +56,42 @@ export const AddNewComicForm = ({
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <ImageInput setImage={setImage} label="Comic Cover:" />
-      {createNewComic.map(({ label }) => (
-        <Input key={label} title={label} {...register(label as ComicForm)} />
+      <ImageForm
+        image={comicCover}
+        setImage={setComicCover}
+        label="Comic cover:"
+      />
+
+      {createNewComic.map(({ label, registerProp }) => (
+        <Input
+          key={label}
+          title={label}
+          {...register(registerProp, { required: true })}
+        />
       ))}
 
-      <MultiSelect items={comicStatus} title="Genres" />
+      <MultiSelect
+        items={genres}
+        title="Genres"
+        state={selectedGenres}
+        setState={setSelectedGenres}
+      />
       <div className="flex gap-2 w-full ">
+        <Select
+          items={comicTypes}
+          defaultValue="Select title type"
+          {...register("type")}
+        />
         <Select
           items={comicStatus}
           defaultValue="Select title status"
           {...register("status")}
         />
+
         <Select
           items={comicStatus}
           defaultValue="Select translate status"
           {...register("translateStatus")}
-        />
-        <Select
-          items={[""]}
-          defaultValue="Select genres"
-          {...register("genres")}
         />
       </div>
       <button type="submit" className="btn btn-sm w-20">
