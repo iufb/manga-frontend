@@ -11,9 +11,7 @@ export default function RootLayout({
     <>
       <Navbar />
       <Alert />
-      <main className="m-auto max-w-[1332px] min-h-[87.2vh]  h-full ">
-        {children}
-      </main>
+      <main className="h-full ">{children}</main>
       <Footer />
     </>
   );

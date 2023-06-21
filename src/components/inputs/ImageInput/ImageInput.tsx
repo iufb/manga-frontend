@@ -42,10 +42,10 @@ export const ImageInput = forwardRef(function ImageInput(
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-3">
       <h2 className="text-xl ">{label}</h2>
       <label
-        htmlFor="avatar"
+        htmlFor={label}
         className={`${className} w-28 h-28 border border-dotted  border-gray-400
          center flex-col gap-3 text-gray-700 cursor-pointer `}
       >
@@ -56,11 +56,11 @@ export const ImageInput = forwardRef(function ImageInput(
           type="file"
           {...props}
           ref={inputRef}
-          id="avatar"
+          id={label}
           hidden
           onChange={handleChange}
         />
       </label>
-    </>
+    </div>
   );
 });

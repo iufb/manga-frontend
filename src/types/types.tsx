@@ -27,7 +27,8 @@ export type UpdateUser = {
   avatar?: string;
 };
 export interface IComic {
-  imgCover: string;
+  comicCover: string;
+  comicBg: string;
   title: string;
   alternativeTitle: string;
   description: string;

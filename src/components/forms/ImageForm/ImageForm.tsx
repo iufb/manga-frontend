@@ -9,18 +9,24 @@ export const ImageForm = ({
   image,
   setImage,
   label,
+  imageFor,
   className,
   ...props
 }: ImageFormProps): JSX.Element => {
   const [isValid, setIsValid] = useState<boolean>(true);
   return (
-    <div {...props} className={`${className} flex gap-4`}>
-      <ImageInput setImage={setImage} label={label} setIsValid={setIsValid} />
+    <div {...props} className={`${className} flex gap-4 items-end`}>
+      <ImageInput
+        setImage={setImage}
+        label={label}
+        setIsValid={setIsValid}
+        minWidth={imageFor == "bg" ? 1200 : undefined}
+      />
       {image && isValid && (
         <ImagePreview
-          width={90}
+          width={imageFor == "default" ? 90 : 400}
           local
-          height={90}
+          height={imageFor == "default" ? 90 : 200}
           src={URL.createObjectURL(image)}
           deleteImage={() => {
             setImage(null);
@@ -31,6 +37,7 @@ export const ImageForm = ({
         <ModalContainer>
           <CropImageModal
             image={image}
+            imageFor={imageFor}
             setImage={setImage}
             setIsValid={setIsValid}
           />

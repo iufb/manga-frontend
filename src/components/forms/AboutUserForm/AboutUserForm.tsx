@@ -59,7 +59,12 @@ export const AboutUserForm = ({ className, ...props }: AboutUserFormProps) => {
       {...props}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <ImageForm image={image} setImage={setImage} label="Avatar: " />
+      <ImageForm
+        image={image}
+        setImage={setImage}
+        label="Avatar: "
+        imageFor="default"
+      />
       <label className="input-group ">
         <span className="text-md mobile:text-sm text-indigoGrey">Name</span>
         <input

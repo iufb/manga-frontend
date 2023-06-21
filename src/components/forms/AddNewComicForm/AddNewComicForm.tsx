@@ -27,20 +27,22 @@ export const AddNewComicForm = ({
   const [comicCover, setComicCover] = useState<File | null | Blob | undefined>(
     null
   );
-  const [comicBg, setComicBg] = useState<File | null>(null);
+  const [comicBg, setComicBg] = useState<File | null | Blob | undefined>(null);
   const router = useRouter();
+  console.log(comicCover, comicBg);
   const { setAlert } = useAlert();
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const onSubmit: SubmitHandler<newComicForm> = async (data) => {
     try {
-      const uploadedImage = await upload(comicCover, "comicCover", {
-        comicName: data.alternativeTitle,
+      const uploadedImage = await upload("comic", comicCover, comicBg, {
+        comicName: data.title.replace(" ", ""),
       });
       if (uploadedImage) {
         const comic = await createComic({
           ...data,
           genres: selectedGenres,
-          imgCover: uploadedImage.data.url,
+          comicCover: uploadedImage.data.comicCover,
+          comicBg: uploadedImage.data.comicBg,
         });
         router.push(`/comic/${comic.data._id}`);
       }
@@ -57,11 +59,17 @@ export const AddNewComicForm = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <ImageForm
+        imageFor="default"
         image={comicCover}
         setImage={setComicCover}
         label="Comic cover:"
       />
-
+      <ImageForm
+        imageFor="bg"
+        image={comicBg}
+        setImage={setComicBg}
+        label="Comic background:"
+      />
       {createNewComic.map(({ label, registerProp }) => (
         <Input
           key={label}
