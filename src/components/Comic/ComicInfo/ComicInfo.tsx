@@ -37,7 +37,7 @@ export const ComicInfo = ({
   ];
   return (
     <ul
-      className={`${className} bg-white p-4 w-[250px] rounded-md flex flex-col gap-2`}
+      className={`${className} bg-white p-4 w-[250px] min-h-[400px] rounded-md flex flex-col gap-2`}
       {...props}
     >
       {info &&

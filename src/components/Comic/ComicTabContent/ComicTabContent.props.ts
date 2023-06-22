@@ -1,6 +1,7 @@
-import { IComic } from "@/types/types";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
-export interface ComicContentProps
+export interface ComicTabContentProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  comic: IComic | null;
+  description: string;
+  genres: string[];
+  id: string;
 }

@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <>
       <UserHeader />
-      <main className="center max-w-[1332px]">{children}</main>
+      <main className="center max-w-[1332px] h-[74vh] mx-auto">{children}</main>
     </>
   );
 }
