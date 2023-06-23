@@ -19,7 +19,7 @@ export const Comic = ({ className, ...props }: ComicProps): JSX.Element => {
   return (
     <div className={`${className} `} {...props}>
       <div
-        className="w-full h-[350px] relative before:absolute before:w-full before:h-full before:bg-gray-600 before:bg-opacity-70  "
+        className="w-full h-[350px] relative before:absolute before:w-full before:h-full before:bg-gray-600 before:bg-opacity-70   "
         style={{
           backgroundImage: `url(http://localhost:3000/${comic?.comicBg})`,
           backgroundRepeat: "no-repeat",

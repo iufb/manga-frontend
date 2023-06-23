@@ -7,12 +7,8 @@ import { AboutUserFormProps } from "./AboutUserForm.props";
 import { upload } from "@/services/uploads";
 import { updateUser } from "@/services/user";
 import { useSWRConfig } from "swr";
-import { ImageInput } from "@/components/inputs/ImageInput/ImageInput";
-import { ModalContainer } from "@/components/modals/ModalContainer/ModalContainer";
-import { CropImageModal } from "@/components/modals/CropImageModal/CropImageModal";
 import { useAlert } from "@/hooks/useAlert";
 import { useAuth } from "@/hooks/useAuth";
-import { ImagePreview } from "@/components/ImagePreview/ImagePreview";
 import { ImageForm } from "../ImageForm/ImageForm";
 
 export type createUserType = {
@@ -33,7 +29,7 @@ export const AboutUserForm = ({ className, ...props }: AboutUserFormProps) => {
   const { setAlert } = useAlert();
   const onSubmit: SubmitHandler<createUserType> = async (data) => {
     try {
-      const imageUrl = await upload(image, "avatar");
+      const imageUrl = await upload({ type: "avatar", file: image });
       if (imageUrl) {
         updateUser({
           name: data.name,

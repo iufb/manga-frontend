@@ -1,9 +1,9 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
-export interface InputProps
+export interface FileInputProps
   extends DetailedHTMLProps<
     HTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  title: string;
-  type?: "email" | "password" | "text" | "number";
+  setFiles: (files: string[]) => void;
+  label: string;
 }

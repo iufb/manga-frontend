@@ -24,7 +24,7 @@ export const UserMenuModal = ({
   if (isOpen) {
     return (
       <div
-        className="w-30 h-30  p-3 rounded bg-gray-700 absolute top-12 left-4  flex flex-col center"
+        className="w-30 h-30  p-3 rounded bg-gray-700 absolute top-12 left-4  flex flex-col center z-20"
         ref={modalRef}
       >
         <Link href={userHref}>Profile</Link>

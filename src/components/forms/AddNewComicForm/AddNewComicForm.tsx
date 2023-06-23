@@ -34,8 +34,13 @@ export const AddNewComicForm = ({
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const onSubmit: SubmitHandler<newComicForm> = async (data) => {
     try {
-      const uploadedImage = await upload("comic", comicCover, comicBg, {
-        comicName: data.title.replace(" ", ""),
+      const uploadedImage = await upload({
+        type: "comic",
+        file: comicCover,
+        secondFile: comicBg,
+        params: {
+          comicName: data.title.replace(" ", ""),
+        },
       });
       if (uploadedImage) {
         const comic = await createComic({

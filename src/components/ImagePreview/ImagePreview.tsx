@@ -7,6 +7,7 @@ export const ImagePreview = ({
   width,
   height,
   src,
+  children,
   deleteImage,
   local,
   ...props
@@ -26,6 +27,7 @@ export const ImagePreview = ({
         src={src ? imageSrc : "/default-image.png"}
         alt={"preview"}
       />
+      {children}
       {deleteImage && (
         <button
           className="absolute btn bg-opacity-80 btn-sm btn-square top-0 left-0"

@@ -1,11 +1,18 @@
 import { instance } from "./axios-client";
 
-export const upload = (
-  type: string,
-  file: Blob | undefined | File | null,
-  secondFile?: Blob | undefined | File | null,
-  params?: Record<string, unknown>
-) => {
+export const upload = ({
+  type,
+  file,
+  secondFile,
+  params,
+  config,
+}: {
+  type: string;
+  file: Blob | undefined | File | null;
+  secondFile?: Blob | undefined | File | null;
+  params?: Record<string, unknown>;
+  config?: Record<string, unknown>;
+}) => {
   if (!file) return null;
   const filename = Math.floor(Math.random() * 100).toString();
   const form = new FormData();
@@ -18,5 +25,7 @@ export const upload = (
       "Content-Type": "multipart/form-data",
     },
     params,
+
+    ...config,
   });
 };

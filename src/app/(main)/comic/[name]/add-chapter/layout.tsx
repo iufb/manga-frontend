@@ -5,7 +5,9 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <main className="w-full min-h-[83vh]  h-full ">{children}</main>
+      <main className="w-[1320px] overflow-hidden h-full min-h-[80vh] mx-auto center">
+        {children}
+      </main>
     </>
   );
 }
