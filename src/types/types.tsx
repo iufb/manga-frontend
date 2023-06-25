@@ -34,6 +34,12 @@ export interface IChapter {
   pages: string[];
   createdAt: Date;
 }
+export interface ICreateChapter {
+  comicId: string;
+  chapterNumber: number;
+  name?: string;
+  pages: string[];
+}
 export interface IComic {
   _id: string;
   comicCover: string;

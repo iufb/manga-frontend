@@ -30,7 +30,7 @@ export const CropImageModal = ({
     <div className="bg-indigoGrey  w-[1000px] h-[700px] p-4 center flex flex-col gap-2 rounded-md z-20 ">
       <Cropper
         ref={cropperRef}
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: "600px", width: "100%" }}
         disabled={true}
         initialAspectRatio={1}
         preview=".img-preview"

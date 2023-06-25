@@ -4,6 +4,7 @@ import { ModalContainer } from "@/components/modals/ModalContainer/ModalContaine
 import { ProgressBar } from "@/components/ProgressBar/ProgressBar";
 import { upload } from "@/services/uploads";
 import { bytesToMB } from "@/utils";
+import { usePathname } from "next/navigation";
 
 export const FileInput = ({
   setFiles,
@@ -14,9 +15,11 @@ export const FileInput = ({
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
+  const id = usePathname().split("/")[2];
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) setFile(e.target?.files[0]);
     e.target.value = "";
+    e.target.files = null;
   };
   const uploadZip = async () => {
     setProgress(0);
@@ -24,7 +27,7 @@ export const FileInput = ({
       type: "chapter",
       file,
       params: {
-        comicName: "test",
+        comicName: id,
       },
       config: {
         onUploadProgress: (progressEvent: ProgressEvent) => {

@@ -19,9 +19,9 @@ export const ProgressBar = ({
     if (elRef.current) elRef.current.style.width = `${value}%`;
   }
   return (
-    <div className={`${className} h-2 rounded-lg bg-gray-300 relative`}>
+    <div className={`${className} h-2 rounded-lg bg-customWhite relative`}>
       <div
-        className={`h-2 rounded-lg bg-green-700 transition transition:width absolute left-0`}
+        className={`h-2 rounded-lg bg-gray-700 transition transition:width absolute left-0`}
         {...props}
         ref={elRef}
         style={{

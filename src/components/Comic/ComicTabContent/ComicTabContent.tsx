@@ -4,6 +4,7 @@ import { Tag } from "@/components/Tag/Tag";
 import { getChapterByComic } from "@/services/chapter";
 import { IChapter } from "@/types/types";
 import { AxiosError } from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 const tabs = ["Information", "Chapters"];
 export const ComicTabContent = ({
@@ -68,7 +69,14 @@ export const ComicTabContent = ({
         chapters && (
           <div className="flex flex-col gap-2 px-3">
             {chapters.map((chapter) => (
-              <div key={chapter._id} className="flex gap-2">
+              <Link
+                href={{
+                  pathname: `comic/${id}/c${chapter.chapterNumber}`,
+                  query: { page: 1 },
+                }}
+                key={chapter._id}
+                className="flex gap-2"
+              >
                 <span className="">Chapter {chapter.chapterNumber}.</span>
                 <span>{chapter.name}</span>
                 <span className="flex-1 text-end">
@@ -80,7 +88,7 @@ export const ComicTabContent = ({
                     })
                     .toString()}
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
         )

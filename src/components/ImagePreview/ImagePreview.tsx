@@ -16,7 +16,7 @@ export const ImagePreview = ({
   return (
     <div
       {...props}
-      className={`relative center `}
+      className={`relative center ${className} `}
       style={{
         width,
       }}
