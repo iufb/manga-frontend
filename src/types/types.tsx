@@ -29,6 +29,7 @@ export type UpdateUser = {
 export interface IChapter {
   _id: string;
   comicId: string;
+  comicName?: [string];
   chapterNumber: number;
   name?: string;
   pages: string[];

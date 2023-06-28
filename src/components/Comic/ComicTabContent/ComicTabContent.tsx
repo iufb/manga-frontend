@@ -71,11 +71,11 @@ export const ComicTabContent = ({
             {chapters.map((chapter) => (
               <Link
                 href={{
-                  pathname: `comic/${id}/c${chapter.chapterNumber}`,
-                  query: { page: 1 },
+                  pathname: `reader/${id}/c${chapter.chapterNumber}`,
+                  query: { chapterId: chapter._id },
                 }}
                 key={chapter._id}
-                className="flex gap-2"
+                className="flex gap-2 hover:bg-gray-300 px-2"
               >
                 <span className="">Chapter {chapter.chapterNumber}.</span>
                 <span>{chapter.name}</span>

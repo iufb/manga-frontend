@@ -6,6 +6,7 @@ export const ImagePreview = ({
   className,
   width,
   height,
+  fill,
   src,
   children,
   deleteImage,
@@ -13,6 +14,7 @@ export const ImagePreview = ({
   ...props
 }: ImagePreviewProps) => {
   const imageSrc = src && local ? src : `http://localhost:3000/${src}`;
+
   return (
     <div
       {...props}
@@ -23,7 +25,11 @@ export const ImagePreview = ({
     >
       <Image
         width={width}
-        height={height}
+        height={width}
+        fill={fill}
+        style={{
+          objectFit: fill ? "contain" : "none",
+        }}
         src={src ? imageSrc : "/default-image.png"}
         alt={"preview"}
       />
